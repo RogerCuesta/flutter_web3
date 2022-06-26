@@ -27,6 +27,7 @@ dependencies:
   web3dart: ^2.4.0
   http: ^0.13.4
   flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
 
   cupertino_icons: ^1.0.2
 
@@ -49,7 +50,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - .env
-     - assets/abi
+     - assets/abi/weth_abi.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
