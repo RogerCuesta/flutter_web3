@@ -35,6 +35,9 @@
 lib/generated_plugin_registrant.dart
 
 #Metamask, Infura and Contracts
+/lib/utils/constants.dart
+
+#Metamask, Infura and Contracts
 *.env
 
 # Symbolication related

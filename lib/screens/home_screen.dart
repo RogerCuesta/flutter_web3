@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
+import 'package:flutter_web3/services/uni_functions.dart';
 import 'package:flutter_web3/utils/constants.dart';
 import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
@@ -16,15 +19,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late Client httpClient;
-  Web3Client? web3Client;
+  EthereumUtils ethUtils = EthereumUtils();
   TextEditingController? userAddressText;
+
+  var _myData;
 
   @override
   void initState() {
     userAddressText = TextEditingController();
-    httpClient = Client();
-    web3Client = Web3Client(infuraKovanUrl, httpClient);
+    ethUtils.initialSetup();
 
     super.initState();
   }
@@ -67,7 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.blue,
                     onPressed: () {
                       setState(() {
-                        userAddressText?.text = '';
+                        if (userAddressText != null) {
+                          ethUtils
+                              .getBalance(userAddressText!.text)
+                              .then((data) {
+                            _myData = data;
+                            setState(() {});
+                          });
+                        } else {}
                       });
                     },
                     child: Text(
@@ -77,6 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+                  _myData != null
+                      ? Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        child: Text(
+                            formatBalance(_myData) + ' UNI',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                      )
+                      : Text('')
                 ],
               ),
             ),
@@ -85,4 +107,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+String formatBalance(BigInt number) {
+  String numberShow;
+
+  numberShow = (number.toInt() / pow(10, 18)).toString();
+
+  return numberShow;
 }

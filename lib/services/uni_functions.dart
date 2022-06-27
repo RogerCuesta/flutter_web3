@@ -21,9 +21,10 @@ class EthereumUtils {
     return contract;
   }
 
-  Future getBalance() async {
-    List<dynamic>? result = await query("getBalance", []);
-    var myData = result != null ? result[0] : null;
+  Future<BigInt> getBalance(String address) async {
+    EthereumAddress ethereumAddress = EthereumAddress.fromHex(address);
+    List<dynamic>? result = await query("balanceOf", [ethereumAddress]);
+    BigInt myData = result != null ? result[0] : null;
     return myData;
   }
 
