@@ -5,13 +5,26 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeEventGetBalance extends HomeEvent {
-  final double balance;
+class HomeEventGetWallet extends HomeEvent {
+  final String walletAddress;
 
-  HomeEventGetBalance(this.balance);
+  HomeEventGetWallet(this.walletAddress);
 
   @override
-  List<Object> get props => [balance];
+  List<Object> get props => [
+        walletAddress,
+      ];
+}
+
+class HomeEventGetBalance extends HomeEvent {
+  final String walletAddress;
+
+  HomeEventGetBalance(this.walletAddress);
+
+  @override
+  List<Object> get props => [
+        walletAddress,
+      ];
 }
 
 class HomeEventLoading extends HomeEvent {}

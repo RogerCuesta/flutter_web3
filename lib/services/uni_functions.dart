@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:web3dart/web3dart.dart';
@@ -25,9 +27,12 @@ class EthereumUtils {
     EthereumAddress ethereumAddress = EthereumAddress.fromHex(address);
     List<dynamic>? result = await query("balanceOf", [ethereumAddress]);
     BigInt myData = result != null ? result[0] : null;
+    final timer =
+        Timer(const Duration(seconds: 5), () => print('Timer finished'));
     return myData;
   }
 
+  // Make query to contracts 
   Future<List<dynamic>?> query(String functionName, List<dynamic> args) async {
     final contract = await getDeployedContract();
     final ethFunction = contract.function(functionName);
@@ -36,6 +41,7 @@ class EthereumUtils {
     return result;
   }
 
+  //Submit transaction (send, sign, etc)
   Future<String?> submit(String functionName, List<dynamic> args) async {
     try {
       EthPrivateKey credential = EthPrivateKey.fromHex(owner_private_key);
