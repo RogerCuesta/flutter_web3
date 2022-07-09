@@ -6,9 +6,6 @@ import 'package:flutter_web3/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_event.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
 import 'package:flutter_web3/services/disperse_functions.dart';
-import 'package:flutter_web3/utils/constants.dart';
-import 'package:http/http.dart';
-import 'package:web3dart/web3dart.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
