@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_event.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
-import 'package:flutter_web3/services/uni_functions.dart';
+import 'package:flutter_web3/services/disperse_functions.dart';
 import 'package:flutter_web3/utils/constants.dart';
 import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
@@ -49,6 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    MaterialButton(
+                      color: Colors.blue,
+                      onPressed: () {
+                        context.read<HomeBloc>().add(HomeEventWalletConnect());
+                      },
+                      child: Text(
+                        'Wallet Connect',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     Text(
                       'Get your UNI balance:',
                     ),

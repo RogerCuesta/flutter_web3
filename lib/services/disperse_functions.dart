@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:walletconnect_dart/walletconnect_dart.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:flutter_web3/utils/constants.dart';
 
@@ -9,10 +10,37 @@ class EthereumUtils {
   http.Client httpClient = http.Client();
   Web3Client? ethClient;
   final contractAddress = uni_contract;
+  // Create a connector
+  final connector = WalletConnect(
+    bridge: 'https://bridge.walletconnect.org',
+    clientMeta: PeerMeta(
+      name: 'DisperseConnect',
+      description: 'DisperseConnect Developer App',
+      url: 'https://walletconnect.org',
+      icons: [
+        'https://gblobscdn.gitbook.com/spaces%2F-LJJeCjcLrr53DcT1Ml7%2Favatar.png?alt=media'
+      ],
+    ),
+  );
 
-  void initialSetup() {
+// Create a new session
+
+  void initialSetup() async {
     String infura = infuraKovanUrl;
     ethClient = Web3Client(infura, httpClient);
+  }
+
+  void walletConnectSetup() async {
+    // Subscribe to events
+    connector.on('connect', (session) => print(session));
+    connector.on('session_update', (payload) => print(payload));
+    connector.on('disconnect', (session) => print(session));
+    if (!connector.connected) {
+      final session = await connector.createSession(
+        chainId: 4160,
+        onDisplayUri: (uri) => print(uri),
+      );
+    }
   }
 
   Future<DeployedContract> getDeployedContract() async {
@@ -32,7 +60,7 @@ class EthereumUtils {
     return myData;
   }
 
-  // Make query to contracts 
+  // Make query to contracts
   Future<List<dynamic>?> query(String functionName, List<dynamic> args) async {
     final contract = await getDeployedContract();
     final ethFunction = contract.function(functionName);

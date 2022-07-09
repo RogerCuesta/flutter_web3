@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Web3 Test'),
+      home: MyHomePage(title: 'Disperse App'),
     );
   }
 }

@@ -27,6 +27,8 @@ class HomeEventGetBalance extends HomeEvent {
       ];
 }
 
+class HomeEventWalletConnect extends HomeEvent {}
+
 class HomeEventLoading extends HomeEvent {}
 
 class HomeEventGetBalanceError extends HomeEvent {}
