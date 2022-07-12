@@ -1,16 +1,24 @@
-# flutter_web3
+# Flutter Web3
 
-A new Flutter project.
+This project is a experimental web3 app in Flutter.
 
-## Getting Started
+____
 
-This project is a starting point for a Flutter application.
+## 🤔 To-do / Ideas
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [] Integrate Wallet Connect
+  - [x] Connect your wallet with Wallet Connect using deepLinking
+  - [ ] Connect your wallet with Wallet Connect using a generated QR
+  - [ ] Make transactions with a connected wallet
+- [ ] Send transactions
+- [ ] Create wallet
+- [ ] Display latest transactions
+- [x] Get data from a smart contract
+- [ ] Sign transaction
+- [ ] Better UX
+- [x] Refresh balance
+- [x] Integrate Web3 package
+- [ ] Display owned tokens
+- [ ] Add dark theme
+- [ ] Ability to display NFTs owned by an address
+- [ ] Better project organization

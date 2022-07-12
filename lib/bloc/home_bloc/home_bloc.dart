@@ -5,11 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_event.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
 import 'package:flutter_web3/services/disperse_functions.dart';
+import 'package:flutter_web3/services/wallet_connect.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:web3dart/web3dart.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final EthereumUtils _ethereumUtils = EthereumUtils();
+  final WalletConnectUtils _walletConnectUtils = WalletConnectUtils();
 
   HomeBloc() : super(HomeState(false)) {
     /* on<HomeEventGetWallet>(
@@ -63,6 +65,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
     HomeEventWalletConnect event,
   ) async {
-    await _ethereumUtils.connectWallet();
+    await _walletConnectUtils.connectWallet();
   }
 }

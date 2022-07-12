@@ -58,6 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
+                    MaterialButton(
+                      color: Colors.blue,
+                      onPressed: () {
+                        //EthereumUtils().submit(functionName, args)
+                      },
+                      child: Text(
+                        'Wallet Connect',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     Text(
                       'Get your UNI balance:',
                     ),
