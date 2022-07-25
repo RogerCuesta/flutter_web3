@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:typed_data';
 
-import 'package:flutter/services.dart';
-import 'package:flutter_web3/bloc/home_bloc/home_bloc.dart';
+import 'package:flutter_web3/bloc/wallet_bloc/wallet_bloc.dart';
+import 'package:flutter_web3/bloc/wallet_bloc/wallet_bloc_event.dart';
+import 'package:flutter_web3/bloc/wallet_bloc/wallet_bloc_state.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:walletconnect_dart/walletconnect_dart.dart';
+import 'package:walletconnect_qrcode_modal_dart/walletconnect_qrcode_modal_dart.dart';
 import 'package:walletconnect_secure_storage/walletconnect_secure_storage.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:flutter_web3/utils/constants.dart';
@@ -51,6 +52,7 @@ class WalletConnectUtils {
 
     connector.on('disconnect', (session) {
       print("disconnect: " + session.toString());
+      //_walletBloc.add(WalletEventDisconnected(false));
     });
 
     // Create a new session
@@ -62,8 +64,6 @@ class WalletConnectUtils {
         },
       );
       sessionStorage.store(connector.session);
-    }else {
-
-    }
+    } else {}
   }
 }

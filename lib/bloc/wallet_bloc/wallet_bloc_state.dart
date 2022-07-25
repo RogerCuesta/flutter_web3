@@ -1,48 +1,56 @@
 import 'package:equatable/equatable.dart';
 
 class WalletState extends Equatable {
-  final String? walletAddress;
-  final bool isLoading;
+  final String walletAddress;
+  final bool isConnected;
 
-  const WalletState(
-    this.isLoading, {
-    this.walletAddress,
+  const WalletState({
+    required this.isConnected,
+    required this.walletAddress,
   });
 
-  WalletState copyWith({
-    String? walletAddress,
-    bool? isLoading,
-  }) {
-    return WalletState(
-      false,
-      walletAddress: walletAddress ?? this.walletAddress,
-    );
-  }
+  factory WalletState.initial() => WalletState(
+        isConnected: false,
+        walletAddress: '',
+      );
 
   @override
   List<Object?> get props => [
         walletAddress,
+        isConnected,
       ];
 }
 
 class WalletStateConnecting extends WalletState {
-  WalletStateConnecting(bool isLoading) : super(isLoading);
+  WalletStateConnecting()
+      : super(
+          isConnected: false,
+          walletAddress: '',
+        );
 
   @override
-  List<Object?> get props => [isLoading];
+  List<Object?> get props => [];
 }
 
-class WalletStateAddedWallet extends WalletState {
+class WalletStateConnected extends WalletState {
   final String walletAddress;
 
-  WalletStateAddedWallet(this.walletAddress) : super(false);
+  WalletStateConnected(this.walletAddress)
+      : super(
+          isConnected: true,
+          walletAddress: walletAddress,
+        );
 
   @override
   List<Object?> get props => [walletAddress];
 }
 
 class WalletStateFailed extends WalletState {
-  WalletStateFailed(bool isLoading) : super(isLoading);
+  WalletStateFailed(bool isConnected)
+      : super(
+          isConnected: isConnected,
+          walletAddress: '',
+        );
   @override
-  List<Object?> get props => [isLoading];
+  List<Object?> get props => [isConnected];
 }

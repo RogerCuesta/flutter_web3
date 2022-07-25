@@ -6,7 +6,7 @@ ____
 
 ## 🤔 To-do / Ideas
 
-- [] Integrate Wallet Connect
+- [ ] Integrate Wallet Connect
   - [x] Connect your wallet with Wallet Connect using deepLinking
   - [ ] Connect your wallet with Wallet Connect using a generated QR
   - [ ] Make transactions with a connected wallet

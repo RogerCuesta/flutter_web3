@@ -3,24 +3,20 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc.dart';
-import 'package:flutter_web3/bloc/home_bloc/home_bloc_event.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
-import 'package:flutter_web3/services/disperse_functions.dart';
+import 'package:flutter_web3/bloc/wallet_bloc/wallet_bloc.dart';
+import 'package:flutter_web3/services/eth_utils.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
   EthereumUtils ethUtils = EthereumUtils();
   TextEditingController? userAddressText;
-
-  var _myData;
 
   @override
   void initState() {
@@ -32,9 +28,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final WalletBloc walletBloc = BlocProvider.of<WalletBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(walletBloc.state.walletAddress),
       ),
       body: BlocProvider(
         create: (_) => HomeBloc(),
@@ -46,30 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        context.read<HomeBloc>().add(HomeEventWalletConnect());
-                      },
-                      child: Text(
-                        'Wallet Connect',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        //EthereumUtils().submit(functionName, args)
-                      },
-                      child: Text(
-                        'Wallet Connect',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
                     Text(
                       'Get your UNI balance:',
                     ),
@@ -93,10 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         : MaterialButton(
                             color: Colors.blue,
-                            onPressed: () {
-                              context.read<HomeBloc>().add(
-                                  HomeEventGetBalance(userAddressText!.text));
-                            },
+                            onPressed: () {},
                             child: Text(
                               'Check',
                               style: TextStyle(

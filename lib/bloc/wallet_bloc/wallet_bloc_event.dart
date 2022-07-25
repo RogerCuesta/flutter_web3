@@ -5,28 +5,33 @@ abstract class WalletEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class WalletEventGetWallet extends WalletEvent {
+class WalletEventWalletConnecting extends WalletEvent {}
+
+class WalletEventWalletConnected extends WalletEvent {
+  final bool isConnected;
   final String walletAddress;
 
-  WalletEventGetWallet(this.walletAddress);
+  WalletEventWalletConnected(
+    this.isConnected,
+    this.walletAddress,
+  );
 
   @override
   List<Object> get props => [
+        isConnected,
         walletAddress,
       ];
 }
 
-/*class WalletEventGetBalance extends WalletEvent {
+class WalletEventDisconnected extends WalletEvent {
+  final bool isConnected;
   final String walletAddress;
 
-  HomeEventGetBalance(this.walletAddress);
+  WalletEventDisconnected(this.isConnected, this.walletAddress);
 
   @override
   List<Object> get props => [
-        walletAddress,
+        isConnected,
+        walletAddress
       ];
-}*/
-
-class WalletEventWalletConnect extends WalletEvent {}
-
-class WalletEventConnecting extends WalletEvent {}
+}

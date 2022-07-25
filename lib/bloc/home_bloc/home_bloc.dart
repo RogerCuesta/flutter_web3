@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_event.dart';
 import 'package:flutter_web3/bloc/home_bloc/home_bloc_state.dart';
-import 'package:flutter_web3/services/disperse_functions.dart';
+import 'package:flutter_web3/services/eth_utils.dart';
 import 'package:flutter_web3/services/wallet_connect.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:web3dart/web3dart.dart';
@@ -20,19 +20,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEventGetBalance>(
       _onHomeEventGetBalance,
     );
-    on<HomeEventWalletConnect>(
-      _onHomeEventWalletConnect,
-    );
   }
 
-  _onHomeEventWalletConnect(
-    HomeEventWalletConnect event,
-    Emitter<HomeState> emit,
-  ) async =>
-      await walletConnect(
-        emit,
-        event,
-      );
+
 
   _onHomeEventGetBalance(
     HomeEventGetBalance event,
@@ -59,12 +49,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       print(e.toString());
       emit(HomeStateFailed(false));
     }
-  }
-
-  Future<void> walletConnect(
-    Emitter<HomeState> emit,
-    HomeEventWalletConnect event,
-  ) async {
-    await _walletConnectUtils.connectWallet();
   }
 }
